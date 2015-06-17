@@ -9,8 +9,15 @@ class DatasetBuilder
   end
 
   def build
-    Dataset.new(root_uri).tap do |d|
-      d.uri_lookup_endpoint = RDF::URI(uri_endpoint)
+    Dataset.new(root_uri).tap do |dataset|
+      dataset.uri_lookup_endpoint = uri_endpoint
+      dataset.search = template_builder.new(dataset, uri_endpoint).build
     end
+  end
+
+  private
+
+  def template_builder
+    TemplateBuilder
   end
 end

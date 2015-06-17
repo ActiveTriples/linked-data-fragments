@@ -36,6 +36,7 @@ gem 'responders'
 gem 'rdf'
 gem 'json-ld'
 gem 'active-triples'
+gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

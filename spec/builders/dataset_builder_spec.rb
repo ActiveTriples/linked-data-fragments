@@ -18,10 +18,13 @@ RSpec.describe DatasetBuilder do
   describe "#build" do
     let(:result) { subject.build }
     it "should assign uri endpoint" do
-      expect(result.uri_lookup_endpoint_ids).to eq [RDF::URI(Setting.uri_endpoint)]
+      expect(result.uri_lookup_endpoint).to eq [Setting.uri_endpoint.to_s]
     end
     it "should have the appropriate subject" do
       expect(result.rdf_subject).to eq RDF::URI(Setting.root_uri)
+    end
+    it "should have a search endpoint with a template" do
+      expect(result.search.first.template.first).to eq Setting.uri_endpoint
     end
   end
 end
