@@ -4,3 +4,4 @@
 # Mime::Type.register "text/richtext", :rtf
 Mime::Type.register "application/ld+json", :jsonld
 Mime::Type.register "application/n-triples", :nt
+Mime::Type.register "text/turtle", :ttl

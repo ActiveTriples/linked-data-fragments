@@ -19,7 +19,8 @@ class DatasetController < ApplicationController
   def renderer_mapping
     {
       :nt => lambda { |data| data.dump(:ntriples) },
-      :jsonld => lambda { |data| data.dump(:jsonld, :standard_prefixes => true) }
+      :jsonld => lambda { |data| data.dump(:jsonld, :standard_prefixes => true) },
+      :ttl => lambda { |data| data.dump(:ttl) }
     }
   end
 

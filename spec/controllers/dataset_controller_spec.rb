@@ -13,6 +13,7 @@ RSpec.describe DatasetController do
         expect(response.content_type).to eq "application/ld+json"
       end
     end
+
     context "n-triples" do
       before do
         get :index, :format => :nt
@@ -22,6 +23,18 @@ RSpec.describe DatasetController do
       end
       it "should be n-triples" do
         expect(response.content_type).to eq "application/n-triples"
+      end
+    end
+
+    context "ttl" do
+      before do
+        get :index, :format => :ttl
+      end
+      it "should return a graph" do
+        expect(RDF::Turtle::Reader.new(response.body).statements.to_a.length).not_to eq 0
+      end
+      it "should be n-triples" do
+        expect(response.content_type).to eq "text/turtle"
       end
     end
   end

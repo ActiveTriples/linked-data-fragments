@@ -292,6 +292,7 @@ DEPENDENCIES
   pry-byebug
   rails (= 4.2.1)
   rdf
+  rdf-turtle
   rdf-vocab!
   responders
   rspec-rails
