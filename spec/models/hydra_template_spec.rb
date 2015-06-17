@@ -27,4 +27,10 @@ RSpec.describe HydraTemplate do
       end
     end
   end
+
+  describe "#to_s" do
+    it "should be the template" do
+      expect(subject.to_s).to eq template
+    end
+  end
 end

@@ -1,5 +1,7 @@
 class HydraTemplate
   attr_reader :template
+  delegate :to_s, :to => :template
+
   def initialize(template)
     @template = template
   end
