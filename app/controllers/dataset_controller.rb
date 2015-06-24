@@ -1,7 +1,13 @@
 class DatasetController < ApplicationController
   def index
     @data = built_dataset
-    render_format(@data)
+    respond_to do |f|
+      renderer_mapping.each do |format, renderer|
+        f.send(format) do
+          render :text => renderer.call(@data)
+        end
+      end
+    end
   end
 
   private
@@ -10,11 +16,12 @@ class DatasetController < ApplicationController
     DatasetBuilder.new.build
   end
 
-  def render_format(data, format=:jsonld)
-    respond_to do |f|
-      f.send(format) do
-        render :text => data.dump(format, :standard_prefixes => true)
-      end
-    end
+  def renderer_mapping
+    {
+      :nt => lambda { |data| data.dump(:ntriples) },
+      :jsonld => lambda { |data| data.dump(:jsonld, :standard_prefixes => true) },
+      :ttl => lambda { |data| data.dump(:ttl) }
+    }
   end
+
 end
