@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DatasetController do
   describe "index" do
+
     context "JSON-LD" do
       before do
         get :index, :format => :jsonld
@@ -37,5 +38,16 @@ RSpec.describe DatasetController do
         expect(response.content_type).to eq "text/turtle"
       end
     end
+
+    context "invalid" do
+      it "should be of type 404 Routing Error" do
+        expect{get :index, :format => :invalid}.to raise_error(ActionController::RoutingError)
+      end
+
+      it "should output valid response formats" do
+        expect{get :index, :format => :invalid}.to raise_error(ActionController::RoutingError, /[ttl].+[application\/ld\+json]/)
+      end
+    end
+
   end
 end
