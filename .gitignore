@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ignore the lock file so we can more easily all have different gems
+/Gemfile.lock
+
+#Ignore Rubymine files
+/.idea
