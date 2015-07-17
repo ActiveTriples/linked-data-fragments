@@ -19,5 +19,6 @@
 #Ignore the lock file so we can more easily all have different gems
 /Gemfile.lock
 
-#Ignore Rubymine files
+#Ignore Rubymine and jetty files
 /.idea
+/jetty
