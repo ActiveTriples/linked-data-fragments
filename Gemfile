@@ -38,6 +38,7 @@ gem 'rdf-turtle'
 gem 'json-ld'
 gem 'active-triples'
 gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
+gem 'jettywrapper', '>= 2.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
