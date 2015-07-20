@@ -9,9 +9,9 @@ RSpec.describe DatasetBuilder do
     end
   end
 
-  describe "#root_uri" do
+  describe "#uri_root" do
     it "should default to the configured value" do
-      expect(subject.root_uri).to eq Setting.root_uri
+      expect(subject.uri_root).to eq Setting.uri_root
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe DatasetBuilder do
       expect(result.uri_lookup_endpoint).to eq [Setting.uri_endpoint.to_s]
     end
     it "should have the appropriate subject" do
-      expect(result.rdf_subject).to eq RDF::URI(Setting.root_uri)
+      expect(result.rdf_subject).to eq RDF::URI(Setting.uri_root)
     end
     it "should have a search endpoint with a template" do
       expect(result.search.first.template.first).to eq Setting.uri_endpoint

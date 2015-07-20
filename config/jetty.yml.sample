@@ -1,0 +1,9 @@
+development:
+  startup_wait: 15
+  jetty_port: 8983
+test: &TEST_
+  startup_wait: 15
+  jetty_port: 8983
+production:
+  startup_wait: 15
+  jetty_port: 8983

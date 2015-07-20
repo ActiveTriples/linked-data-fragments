@@ -4,12 +4,12 @@ class DatasetBuilder
     @uri_endpoint ||= HydraTemplate.new(Setting.uri_endpoint)
   end
 
-  def root_uri
-    @root_uri ||= Setting.root_uri
+  def uri_root
+    @uri_root ||= Setting.uri_root
   end
 
   def build
-    Dataset.new(root_uri).tap do |dataset|
+    Dataset.new(uri_root).tap do |dataset|
       dataset.uri_lookup_endpoint = uri_endpoint.to_s
       dataset.search = template_builder.new(dataset, uri_endpoint).build
       uri_endpoint.controls.each do |control|
