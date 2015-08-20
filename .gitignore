@@ -22,3 +22,6 @@
 #Ignore Rubymine and jetty files
 /.idea
 /jetty
+
+#Ignore yml files
+/*.yml

@@ -35,10 +35,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'responders'
 gem 'rdf'
 gem 'rdf-turtle'
-gem 'json-ld'
+gem 'json-ld', '1.1.8'
 gem 'active-triples'
 gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
 gem 'jettywrapper', '>= 2.0.0'
+gem 'marmotta'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,5 +53,7 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'pry-byebug'
+  gem 'vcr'
+  gem 'webmock'
 end
 
