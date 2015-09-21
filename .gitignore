@@ -25,3 +25,6 @@
 
 #Ignore yml files
 /*.yml
+
+# Ignore LDF config
+config/ldf.yml

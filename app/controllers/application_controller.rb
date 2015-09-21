@@ -12,12 +12,16 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def renderer_mapping
+  def self.renderer_mapping
     {
         :nt => lambda { |data| data.dump(:ntriples) },
         :jsonld => lambda { |data| data.dump(:jsonld, :standard_prefixes => true) },
         :ttl => lambda { |data| data.dump(:ttl) }
     }
+  end
+
+  def renderer_mapping
+    self.class.renderer_mapping
   end
 
   def renderer_mapping_to_strings
