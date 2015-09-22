@@ -8,7 +8,6 @@ module LinkedDataFragments
     def retrieve(uri)
       resource = ::Marmotta::Resource.new(uri, connection: @connection)
       resulting_graph = resource.get
-      resource.post(resulting_graph)
 
       return resulting_graph
     end
