@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dbpedia.org/data/BerlinInvalidAndNotReal.nt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle, text/rdf+turtle, application/turtle, application/x-turtle, application/ld+json,
+        application/x-ld+json, application/n-triples, text/plain;q=0.5, application/n-quads,
+        text/x-nquads, */*;q=0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 07 Mar 2016 20:13:52 GMT
+      Content-Type:
+      - text/rdf+n3; charset=UTF-8
+      Content-Length:
+      - '15'
+      Connection:
+      - keep-alive
+      Server:
+      - Virtuoso/07.20.3215 (Linux) i686-generic-linux-glibc212-64  VDB
+      Expires:
+      - Mon, 14 Mar 2016 20:13:52 GMT
+      Link:
+      - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/BerlinInvalidAndNotReal.xml>;
+        rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor
+        Document (RDF/XML format)", <http://dbpedia.org/data/BerlinInvalidAndNotReal.n3>;
+        rel="alternate"; type="text/n3"; title="Structured Descriptor Document (N3/Turtle
+        format)", <http://dbpedia.org/data/BerlinInvalidAndNotReal.json>; rel="alternate";
+        type="application/json"; title="Structured Descriptor Document (RDF/JSON format)",
+        <http://dbpedia.org/data/BerlinInvalidAndNotReal.atom>; rel="alternate"; type="application/atom+xml";
+        title="OData (Atom+Feed format)", <http://dbpedia.org/data/BerlinInvalidAndNotReal.jsod>;
+        rel="alternate"; type="application/odata+json"; title="OData (JSON format)",
+        <http://dbpedia.org/page/BerlinInvalidAndNotReal>; rel="alternate"; type="text/html";
+        title="XHTML+RDFa", <http://dbpedia.org/resource/BerlinInvalidAndNotReal>;
+        rel="http://xmlns.com/foaf/0.1/primaryTopic", <http://dbpedia.org/resource/BerlinInvalidAndNotReal>;
+        rev="describedby", <http://mementoarchive.lanl.gov/dbpedia/timegate/http://dbpedia.org/data/BerlinInvalidAndNotReal.nt>;
+        rel="timegate"
+      X-Sparql-Default-Graph:
+      - http://dbpedia.org
+      Cache-Control:
+      - max-age=604800
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: |
+        # Empty TURTLE
+    http_version: 
+  recorded_at: Mon, 07 Mar 2016 20:13:54 GMT
+recorded_with: VCR 3.0.1

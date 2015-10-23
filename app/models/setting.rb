@@ -52,7 +52,7 @@ class Setting
     end
 
     def cache_backend_url
-      Setting.config[:cache_backend][:url] || 'http://localhost:8983/marmotta'
+      Setting.config[:cache_backend][:url] || 'http://localhost:8988/marmotta'
     end
 
     def cache_backend_context

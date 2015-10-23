@@ -9,6 +9,10 @@ class SubjectController < ApplicationController
     case Setting.cache_backend
       when 'marmotta'
         @cache = LinkedDataFragments::Marmotta.new
+      when 'repository'
+        @cache = LinkedDataFragments::Repository.new
+      when 'blazegraph'
+        @cache = LinkedDataFragments::Blazegraph.new
       else
         #FIXME: What type of error should this be? Need to unit test this as well once figured out.
         raise ArgumentError, 'Invalid cache_backend set in the yml config'
