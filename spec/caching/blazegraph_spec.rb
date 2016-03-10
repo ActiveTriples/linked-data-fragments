@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe LinkedDataFragments::Blazegraph do
   subject {
+    Setting.stub(:cache_backend).and_return('blazegraph')
     Setting.stub(:cache_backend_url).and_return('http://localhost:8988/blazegraph/sparql')
+    Setting.stub(:cache_backend_context).and_return('http://localhost:8988/linked-data-fragments-test')
     LinkedDataFragments::Blazegraph.new
   }
 
@@ -11,6 +13,12 @@ RSpec.describe LinkedDataFragments::Blazegraph do
   end
 
   context "retrieve a subject uri", :vcr do
+    it "should be configured as a Blazegraph instance with the mocked uri" do
+      expect(subject).to be_instance_of LinkedDataFragments::Blazegraph
+      expect(subject.cache_backend_url).to eq "http://localhost:8988/blazegraph/sparql"
+      expect(subject.cache_backend_context).to eq "http://localhost:8988/linked-data-fragments-test"
+    end
+
     it "should retrieve and return a response on a valid subject uri" do
       expect(subject.retrieve('http://dbpedia.org/resource/Berlin').dump(:ttl)).to match /http\:\/\/dbpedia.org\/resource\/Category\:Berlin/
     end

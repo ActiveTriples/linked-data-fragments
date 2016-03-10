@@ -1,5 +1,5 @@
 module LinkedDataFragments
-  class Repository
+  class Repository < BackendBase
 
     def initialize
       @repo = RDF::Repository.new

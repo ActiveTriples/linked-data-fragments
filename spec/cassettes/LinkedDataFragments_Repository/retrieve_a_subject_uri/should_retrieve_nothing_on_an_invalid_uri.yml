@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Mar 2016 20:13:52 GMT
+      - Thu, 10 Mar 2016 16:38:45 GMT
       Content-Type:
       - text/rdf+n3; charset=UTF-8
       Content-Length:
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - Virtuoso/07.20.3215 (Linux) i686-generic-linux-glibc212-64  VDB
       Expires:
-      - Mon, 14 Mar 2016 20:13:52 GMT
+      - Thu, 17 Mar 2016 16:38:45 GMT
       Link:
       - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/BerlinInvalidAndNotReal.xml>;
         rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor
@@ -58,5 +58,5 @@ http_interactions:
       string: |
         # Empty TURTLE
     http_version: 
-  recorded_at: Mon, 07 Mar 2016 20:13:54 GMT
+  recorded_at: Thu, 10 Mar 2016 16:38:48 GMT
 recorded_with: VCR 3.0.1

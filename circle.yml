@@ -4,5 +4,3 @@ machine:
 dependencies:
   post:
     - cp config/ldf.yml.sample_repository config/ldf.yml
-    - bundle exec rake ldfwrapper:install
-    - bundle exec rake ldfjetty:start

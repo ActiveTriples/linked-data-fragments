@@ -35,7 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'responders'
 gem 'rdf'
 gem 'rdf-turtle'
-gem 'json-ld', '1.1.8'
+gem 'json-ld', '~> 1.99'
 #gem 'json-ld'
 gem 'active-triples'
 #gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
@@ -54,7 +54,6 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'pry-byebug'
-  #gem 'vcr'
 end
 
 group :development do
@@ -63,5 +62,6 @@ group :development do
 end
 
 group :test do
-  #gem 'webmock'
+  gem 'vcr'
+  gem 'webmock'
 end

@@ -56,7 +56,7 @@ RSpec.describe SubjectController do
 
     context "n-triples", :vcr do
       before do
-        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :nt}
+        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :nt} #This breaks in Blazegraph? CHECKME
       end
       it "should return a graph" do
         expect(RDF::NTriples::Reader.new(response.body).statements.to_a.length).not_to eq 0
