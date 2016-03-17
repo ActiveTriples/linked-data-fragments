@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe SubjectController do
 
   describe "settings" do
+    #FIXME
     context "#cache_service" do
       it "should default be set to a valid service with a retrieve method" do
-        expect(SubjectController.cache_service).to be_instance_of LinkedDataFragments::Marmotta #FIXME
+        expect(SubjectController.cache_service.respond_to?(:retrieve)).to eq true
       end
     end
 
@@ -55,7 +56,7 @@ RSpec.describe SubjectController do
 
     context "n-triples", :vcr do
       before do
-        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :nt}
+        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :nt} #This breaks in Blazegraph? CHECKME
       end
       it "should return a graph" do
         expect(RDF::NTriples::Reader.new(response.body).statements.to_a.length).not_to eq 0

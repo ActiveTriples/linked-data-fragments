@@ -35,27 +35,33 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'responders'
 gem 'rdf'
 gem 'rdf-turtle'
-gem 'json-ld', '1.1.8'
+gem 'json-ld', '~> 1.99'
+#gem 'json-ld'
 gem 'active-triples'
-gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
+#gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
+gem 'rdf-vocab', '0.8.7.1'
 gem 'jettywrapper', '>= 2.0.0'
 gem 'marmotta'
+gem 'ldfwrapper', github: 'boston-library/ldf-wrapper', branch: "master"
+gem 'rdf-blazegraph'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
   gem 'rspec-rails'
   gem 'pry-byebug'
-  gem 'vcr'
+end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
+  gem 'vcr'
   gem 'webmock'
 end

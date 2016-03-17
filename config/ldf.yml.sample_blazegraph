@@ -1,0 +1,21 @@
+development:
+  uri_endpoint: 'http://localhost:3000/{?subject}'
+  uri_root: 'http://localhost:3000/#dataset'
+  cache_backend:
+    provider: 'blazegraph'
+    url: 'http://localhost:8988/blazegraph/sparql'
+    context: 'http://localhost:8988/linked_data_fragments_dev'
+test: &TEST_
+  uri_endpoint: 'http://localhost:3000/{?subject}'
+  uri_root: 'http://localhost:3000/#dataset'
+  cache_backend:
+    provider: 'blazegraph'
+    url: 'http://localhost:8988/blazegraph/sparql'
+    context: 'http://localhost:8988/linked_data_fragments_test'
+production:
+  uri_endpoint: 'http://localhost:3000/{?subject}'
+  uri_root: 'http://localhost:3000/#dataset'
+  cache_backend:
+    provider: 'blazegraph'
+    url: 'http://localhost:8988/blazegraph/sparql'
+    context: 'http://localhost:8988/linked_data_fragments_production'

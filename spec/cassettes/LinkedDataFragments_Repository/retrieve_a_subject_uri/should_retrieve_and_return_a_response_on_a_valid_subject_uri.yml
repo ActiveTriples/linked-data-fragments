@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 10 Mar 2016 16:38:46 GMT
+      - Thu, 10 Mar 2016 16:38:42 GMT
       Content-Type:
       - text/rdf+n3; charset=UTF-8
       Transfer-Encoding:
@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - Virtuoso/07.20.3215 (Linux) i686-generic-linux-glibc212-64  VDB
       Expires:
-      - Thu, 17 Mar 2016 16:38:46 GMT
+      - Thu, 17 Mar 2016 16:38:42 GMT
       Link:
       - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/Berlin.xml>;
         rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor
@@ -11133,5 +11133,5 @@ http_interactions:
         ZGF5CWRibzpkZWF0aFBsYWNlCWRicjpCZXJsaW4gLgpkYnI6T2RlbnNlX0Jv
         bGRrbHViCWRicDpzdGFkaXVtCWRicjpCZXJsaW4gLg==
     http_version: 
-  recorded_at: Thu, 10 Mar 2016 16:38:49 GMT
+  recorded_at: Thu, 10 Mar 2016 16:38:45 GMT
 recorded_with: VCR 3.0.1

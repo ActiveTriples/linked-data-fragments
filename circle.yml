@@ -3,5 +3,4 @@ machine:
     version: 2.2.0
 dependencies:
   post:
-    - cp config/ldf.yml.sample config/ldf.yml
-    - cp config/jetty.yml.sample config/jetty.yml
+    - cp config/ldf.yml.sample_repository config/ldf.yml
