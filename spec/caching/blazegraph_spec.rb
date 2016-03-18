@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe LinkedDataFragments::Blazegraph do
   subject {
-    Setting.stub(:cache_backend).and_return('blazegraph')
-    Setting.stub(:cache_backend_url).and_return('http://localhost:8988/blazegraph/sparql')
-    Setting.stub(:cache_backend_context).and_return('http://localhost:8988/linked-data-fragments-test')
+    allow(Setting).to receive(:cache_backend).and_return('blazegraph')
+    allow(Setting).to receive(:cache_backend_url).and_return('http://localhost:8988/blazegraph/sparql')
+    allow(Setting).to receive(:cache_backend_context).and_return('http://localhost:8988/linked-data-fragments-test')
     LinkedDataFragments::Blazegraph.new
   }
 
