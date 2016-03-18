@@ -43,7 +43,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    Setting.stub(:cache_backend).and_return('repository')
+    allow(Setting).to receive(:cache_backend).and_return('repository')
   end
 
 # The settings below are suggested to provide a good initial experience

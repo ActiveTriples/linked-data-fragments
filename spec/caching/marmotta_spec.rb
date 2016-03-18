@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe LinkedDataFragments::Marmotta do
   subject {
-    Setting.stub(:cache_backend).and_return('marmotta')
-    Setting.stub(:cache_backend_url).and_return('http://localhost:8988/marmotta')
-    Setting.stub(:cache_backend_context).and_return('http://localhost:8988/linked-data-fragments-test')
+    allow(Setting).to receive(:cache_backend).and_return('marmotta')
+    allow(Setting).to receive(:cache_backend_url).and_return('http://localhost:8988/marmotta')
+    allow(Setting).to receive(:cache_backend_context).and_return('http://localhost:8988/linked-data-fragments-test')
     LinkedDataFragments::Marmotta.new
   }
 

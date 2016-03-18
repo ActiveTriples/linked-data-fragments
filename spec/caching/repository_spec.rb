@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LinkedDataFragments::Repository do
   subject {
-    Setting.stub(:cache_backend).and_return('repository')
+    allow(Setting).to receive(:cache_backend).and_return('repository')
     LinkedDataFragments::Repository.new
   }
 
