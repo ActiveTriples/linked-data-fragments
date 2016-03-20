@@ -1,6 +1,0 @@
-machine:
-  ruby:
-    version: 2.2.0
-dependencies:
-  post:
-    - cp config/ldf.yml.sample_repository config/ldf.yml
