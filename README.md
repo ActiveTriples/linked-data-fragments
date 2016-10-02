@@ -19,7 +19,7 @@ Marmotta
 If you do not already have a marmotta instance, you can use an instance that runs off of jetty by running the following
 rake task:
 
-    rake ldfwrapper:install
+    rake ldfjetty:install
 
 Once that finishes, please copy config/jetty.yml.sample to config/jetty.yml. You can change the defaults.
 
@@ -35,7 +35,7 @@ Blazegraph
 If you do not already have a blazegraph instance, you can use an instance that runs off of jetty by running the following
 rake task:
 
-    rake ldfwrapper:install
+    rake ldfjetty:install
 
 Once that finishes, please copy config/ldfjetty.yml.sample to config/ldfjetty.yml. You can change the defaults.
 
