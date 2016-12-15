@@ -27,5 +27,10 @@
 #Ignore yml files
 /*.yml
 
-# Ignore LDF config
+# Ignore LDF & jetty configs
 config/ldf.yml
+config/jetty.yml
+
+# Ignore .ruby files
+.ruby-version
+.ruby-gemset
