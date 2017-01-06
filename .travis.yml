@@ -1,0 +1,19 @@
+notifications:
+  email: false
+
+rvm:
+  - 2.2.4
+  - 2.3.0
+
+notifications:
+  irc: "irc.freenode.org#blacklight"
+
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+sudo: false
+language: ruby
+
+script:
+  - bundle exec rake --trace

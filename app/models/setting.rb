@@ -4,8 +4,10 @@
 class Setting
   class << self
     def config
-      @config ||= YAML::load(File.open(config_path))[env]
-      .with_indifferent_access
+      # handle the case of the config file not existing (before running the generator)
+      return {} unless File.exists?(config_path)
+      @config ||= YAML::load(File.open(config_path)).fetch(env)
+        .with_indifferent_access
     end
 
     def app_root
