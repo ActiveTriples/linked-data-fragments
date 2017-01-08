@@ -23,5 +23,8 @@ module LinkedDataFragments
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Custom configurations for LinkedDataFragments
+    config.x.cache_config = config_for(:cache)
   end
 end

@@ -1,0 +1,49 @@
+default: &default
+  enabled:             false.freeze
+  connection_timeout:  10000
+  so_timeout:          60000
+  minexpiry:           86400
+  expiry:              86400
+
+development:
+  <<: *default
+
+  endpoints:
+    loc_names:
+      prefix:   http://id.loc.gov/authorities/names/
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   3600
+
+test:
+  <<: *default
+
+  endpoints:
+    loc_names:
+      prefix:   http://id.loc.gov/authorities/names/
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   3600
+    loc_subjects:
+      prefix:   http://id.loc.gov/authorities/subjects/
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   6000
+    loc_genre:
+      prefix:   http://id.loc.gov/authorities/genre/
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   40000
+    loc:
+      prefix:   http://id.loc.gov/authorities
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   80000
+    oclc:
+      prefix:   http://id.worldcat.org/fast/
+      mimetype: application/ld+json
+      kind:     linked data
+      expiry:   80000
+
+production:
+  <<: *default
