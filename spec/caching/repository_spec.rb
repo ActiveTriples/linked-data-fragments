@@ -2,16 +2,15 @@ require 'rails_helper'
 
 RSpec.describe LinkedDataFragments::Repository do
   subject {
-    allow(Setting).to receive(:cache_backend).and_return('repository')
+    allow(Setting).to receive(:cache_backend).and_return(:repository)
     LinkedDataFragments::Repository.new
   }
 
-  after do
-    subject.delete_all
-  end
+  after { subject.delete_all! }
+
+  it_behaves_like 'a backend'
 
   context "retrieve a subject uri", :vcr do
-
     it "should be configured as a Repository instance" do
       expect(subject).to be_instance_of LinkedDataFragments::Repository
     end
