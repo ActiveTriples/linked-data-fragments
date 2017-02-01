@@ -19,7 +19,7 @@ RSpec.describe Result do
   end
 
   it "should apply the Result schema" do
-    ResultSchema.properties.each do |property|
+    LinkedDataFragments::ResultSchema.properties.each do |property|
       expect(subject.class.properties[property.name.to_s].predicate).to eq property.predicate
     end
   end

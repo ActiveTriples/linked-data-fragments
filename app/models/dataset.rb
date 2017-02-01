@@ -8,5 +8,6 @@ class Dataset
     RDF::URI.intern("http://www.w3.org/ns/hydra/core#Collection"),
     RDF::Vocab::VOID.Dataset
   ]
-  apply_schema DatasetSchema
+
+  apply_schema LinkedDataFragments::DatasetSchema
 end

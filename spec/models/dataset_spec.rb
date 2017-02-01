@@ -14,7 +14,7 @@ RSpec.describe Dataset do
   end
   
   it "should apply the dataset schema" do
-    DatasetSchema.properties.each do |property|
+    LinkedDataFragments::DatasetSchema.properties.each do |property|
       expect(subject.class.properties[property.name.to_s].predicate).to eq property.predicate
     end
   end
