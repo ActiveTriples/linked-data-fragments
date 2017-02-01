@@ -1,4 +1,5 @@
 require 'vcr_setup'
+require 'linked_data_fragments'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
