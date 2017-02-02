@@ -2,6 +2,18 @@ shared_examples 'a backend' do
   let(:url) { 'http://dbpedia.org/resource/Berlin' }
 
   after { subject.delete_all! }
+  
+  describe '.for' do
+    it 'defaults to Repostiory' do
+      expect(described_class.for)
+        .to be_a LinkedDataFragments::Repository
+    end
+
+    it 'raises ArgumentError when name does not exist' do
+      expect { described_class.for(name: :totally_fake) }
+        .to raise_error ArgumentError
+    end
+  end
 
   describe '#add', :vcr do
     it 'adds a url' do

@@ -6,18 +6,11 @@ class SubjectController < ApplicationController
   end
 
   def self.assign_cache_service
-    case Setting.cache_backend
-      when 'marmotta'
-        @cache = LinkedDataFragments::Marmotta.new
-      when 'repository'
-        @cache = LinkedDataFragments::Repository.new
-      when 'blazegraph'
-        @cache = LinkedDataFragments::Blazegraph.new
-      else
-        #FIXME: What type of error should this be? Need to unit test this as well once figured out.
-        raise ArgumentError, 'Invalid cache_backend set in the yml config'
-    end
-    return @cache
+    @cache = LinkedDataFragments::BackendBase
+               .for(name: Setting.cache_backend)
+  rescue ArgumentErrror
+    raise ArgumentError, 'Invalid cache_backend set in the yml config'
+        
   end
 
   def subject

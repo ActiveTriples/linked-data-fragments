@@ -9,6 +9,26 @@ module LinkedDataFragments
   #   resources from the cache.
   class BackendBase
     ##
+    # A backend factory.
+    #
+    # @param name [#to_sym]
+    # @return [BackendBase] a backend instance
+    #
+    # @raise [ArgumentError] when the name does not match a repository
+    def self.for(name: :repository)
+      case name.to_sym
+      when :marmotta
+        LinkedDataFragments::Marmotta.new
+      when :repository
+        LinkedDataFragments::Repository.new
+      when :blazegraph
+        LinkedDataFragments::Blazegraph.new
+      else
+        raise ArgumentError, "Invalid backend `#{name}` specified."
+      end
+    end
+
+    ##
     # @!attribute [rw] cache_backend_url
     #   @return [String, nil] a target url in string form; `nil` may be 
     #     returned when the backend repository is not remote.
