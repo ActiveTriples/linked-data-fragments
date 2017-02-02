@@ -6,6 +6,8 @@ require 'rdf/vocab'
 require 'rdf/vocab/hydra'
 require 'rdf/vocab/void'
 
+require 'linked_data_fragments/settings'
+
 require 'linked_data_fragments/schemas'
 require 'linked_data_fragments/models'
 require 'linked_data_fragments/hydra_template'
