@@ -14,8 +14,8 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.2.2'
 
   gem.add_runtime_dependency 'active-triples'
-  gem.add_runtime_dependency 'rdf',           '~> 1.99'
-  gem.add_runtime_dependency 'rdf-turtle',    '~> 1.99'
-  gem.add_runtime_dependency 'json-ld',       '~> 1.99'
-  gem.add_runtime_dependency 'rdf-vocab',     '0.8.7.1'
+  gem.add_runtime_dependency 'rdf'
+  gem.add_runtime_dependency 'rdf-turtle'
+  gem.add_runtime_dependency 'json-ld'
+  gem.add_runtime_dependency 'rdf-vocab'
 end
