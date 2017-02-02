@@ -26,7 +26,8 @@ class DatasetBuilder
   # @return [HydraTemplate]
   # @see Setting#uri_endpoint
   def uri_endpoint
-    @uri_endpoint ||= HydraTemplate.new(Setting.uri_endpoint)
+    @uri_endpoint ||= 
+      LinkedDataFragments::HydraTemplate.new(Setting.uri_endpoint)
   end
 
   ##
