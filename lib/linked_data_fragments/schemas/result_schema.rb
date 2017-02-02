@@ -2,7 +2,7 @@ module LinkedDataFragments
   ##
   # Schema for Result model
   class ResultSchema < ActiveTriples::Schema
-    property :subset,      :predicate => RDF::VOID.subset
+    property :subset,      :predicate => RDF::Vocab::VOID.subset
 
     # Descriptive
     property :title,       :predicate => RDF::Vocab::DC.title
