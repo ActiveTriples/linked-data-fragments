@@ -7,11 +7,14 @@ require 'rdf/vocab/hydra'
 require 'rdf/vocab/void'
 
 require 'linked_data_fragments/settings'
+require 'linked_data_fragments/backend_base'
 
 require 'linked_data_fragments/builders'
 require 'linked_data_fragments/schemas'
 require 'linked_data_fragments/models'
 require 'linked_data_fragments/hydra_template'
+
+require 'linked_data_fragments/service'
 
 ##
 # A linked data caching fragment
