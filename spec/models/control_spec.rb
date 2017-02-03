@@ -4,7 +4,7 @@ RSpec.describe Control do
   subject { described_class.new }
   
   it "should apply the control schema" do
-    ControlSchema.properties.each do |property|
+    LinkedDataFragments::ControlSchema.properties.each do |property|
       expect(subject.class.properties[property.name.to_s].predicate).to eq property.predicate
     end
   end

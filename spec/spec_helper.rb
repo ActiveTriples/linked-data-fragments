@@ -1,4 +1,5 @@
 require 'vcr_setup'
+require 'linked_data_fragments'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
@@ -45,7 +46,10 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    allow(Setting).to receive(:cache_backend).and_return('repository')
+    # @todo: Eliminate this.
+    if Object.const_defined?('Setting')
+      allow(Setting).to receive(:cache_backend).and_return('repository')
+    end
   end
 
 # The settings below are suggested to provide a good initial experience

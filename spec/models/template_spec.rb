@@ -5,7 +5,7 @@ RSpec.describe Template do
   let(:uri) { RDF::Node.new("triplePattern") }
 
   it "should apply the template schema" do
-    TemplateSchema.properties.each do |property|
+    LinkedDataFragments::TemplateSchema.properties.each do |property|
       expect(subject.class.properties[property.name.to_s].predicate).to eq property.predicate
     end
   end

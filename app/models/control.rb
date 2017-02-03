@@ -1,4 +1,4 @@
 class Control
   include ActiveTriples::RDFSource
-  apply_schema ControlSchema
+  apply_schema LinkedDataFragments::ControlSchema
 end
