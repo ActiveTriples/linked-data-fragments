@@ -14,7 +14,7 @@ module LinkedDataFragments
     # @param name [#to_sym]
     # @return [BackendBase] a backend instance
     #
-    # @raise [ArgumentError] when the name does not match a repository
+    # @raise [UnsupportedBackend] when the name does not match a repository
     def self.for(name: :repository)
       case name.to_sym
       when :marmotta
@@ -24,7 +24,7 @@ module LinkedDataFragments
       when :blazegraph
         LinkedDataFragments::Blazegraph.new
       else
-        raise ArgumentError, "Invalid backend `#{name}` specified."
+        raise UnsupportedBackend, "Invalid backend `#{name}` specified."
       end
     end
 
@@ -128,5 +128,7 @@ module LinkedDataFragments
       raise NotImplementedError,
             "#{self.class} should implement `#retrieve!`, but does not."
     end
+
+    class UnsupportedBackend < NameError; end
   end
 end
