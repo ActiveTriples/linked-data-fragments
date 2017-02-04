@@ -7,7 +7,7 @@ require 'linked_data_fragments/cache_server'
 describe LinkedDataFragments::CacheServer do
   include Rack::Test::Methods
 
-  let(:app) { described_class.new(proc { |env| }) }
+  let(:app) { described_class::APPLICATION }
 
   before do
     # @todo: REMOVE THIS HACKY STUB
