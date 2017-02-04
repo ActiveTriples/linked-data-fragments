@@ -16,11 +16,14 @@ RSpec.describe LinkedDataFragments::Repository do
     end
 
     it "should retrieve and return a response on a valid subject uri" do
-      expect(subject.retrieve('http://dbpedia.org/resource/Berlin').dump(:ttl)).to match /http\:\/\/dbpedia.org\/resource\/Category\:Berlin/
+      expect(subject.retrieve('http://dbpedia.org/resource/Berlin').dump(:ttl))
+        .to match /http\:\/\/dbpedia.org\/resource\/Category\:Berlin/
     end
 
     it "should retrieve nothing on an invalid uri" do
-      expect(subject.retrieve('http://dbpedia.org/resource/BerlinInvalidAndNotReal')).to be_empty
+      expect(subject
+        .retrieve('http://dbpedia.org/resource/BerlinInvalidAndNotReal'))
+        .to be_empty
     end
   end
 end
