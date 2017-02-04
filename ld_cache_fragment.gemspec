@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'rdf-turtle'
   gem.add_runtime_dependency 'json-ld'
   gem.add_runtime_dependency 'rdf-vocab'
+  gem.add_runtime_dependency 'rack-linkeddata'
 end
