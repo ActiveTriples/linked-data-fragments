@@ -15,15 +15,20 @@ module LinkedDataFragments
   #
   class Repository < BackendBase
     ##
+    # @!attribute [r] repository
+    #   @return [RDF::Repository]
+    attr_reader :repository
+
+    ##
     # @param repository [RDF::Repository] a repository instance
     def initialize(repository: RDF::Repository.new)
-      @repo = repository
+      @repository = repository
     end
 
     ##
     # @see BackendBase#add
     def add(uri)
-      @repo.load(uri)
+      repository.load(uri)
     end
 
     ##
@@ -31,28 +36,27 @@ module LinkedDataFragments
     #
     # @return [void]
     def delete_all!
-      @repo.clear
+      repository.clear
     end
 
     ##
     # @see BackendBase#empty?
     def empty?
-      @repo.empty?
+      repository.empty?
     end
 
     ##
     # @see BackendBase#has_resource?
     def has_resource?(uri)
-      @repo.has_subject?(RDF::URI.new(uri))
+      repository.has_subject?(RDF::URI.intern(uri))
     end
 
     ##
     # @see BackendBase#retrieve
     def retrieve(uri)
-      @repo.load(uri) unless has_resource?(uri)
+      repository.load(uri) unless has_resource?(uri)
 
-      resulting_graph = @repo.query(:subject => RDF::URI.new(uri))
-      return resulting_graph
+      repository.query(subject: RDF::URI.intern(uri))
     end
   end
 end
