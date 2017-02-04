@@ -23,8 +23,7 @@ module LinkedDataFragments
     ##
     # @see BackendBase#add
     def add(uri)
-      uri_to_load = get_resource_uri(uri)
-      @repo.load(uri_to_load)
+      @repo.load(uri)
     end
 
     ##
@@ -50,10 +49,7 @@ module LinkedDataFragments
     ##
     # @see BackendBase#retrieve
     def retrieve(uri)
-      if !has_resource?(uri)
-        uri_to_load = get_resource_uri(uri)
-        @repo.load(uri_to_load)
-      end
+      @repo.load(uri) unless has_resource?(uri)
 
       resulting_graph = @repo.query(:subject => RDF::URI.new(uri))
       return resulting_graph
