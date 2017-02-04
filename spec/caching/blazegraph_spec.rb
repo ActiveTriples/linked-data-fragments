@@ -23,10 +23,8 @@ RSpec.describe LinkedDataFragments::Blazegraph do
       expect(subject.retrieve('http://dbpedia.org/resource/Berlin').dump(:ttl)).to match /http\:\/\/dbpedia.org\/resource\/Category\:Berlin/
     end
 
-=begin
-    it "should retrieve nothing on an invalid uri" do
+    xit "should retrieve nothing on an invalid uri" do
       expect(subject.retrieve('http://dbpedia.org/resource/BerlinInvalidAndNotReal')).to be_empty
     end
-=end
   end
 end

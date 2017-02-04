@@ -85,24 +85,15 @@ module LinkedDataFragments
     end
 
     ##
-    # Maps input URIs to the resource URI in the backend.
-    #
-    # @todo Is it necessary for the backend to know about this? Can we just 
-    #   expect the correct URI to be passed to {#retrieve}, with any mapping 
-    #   handled by that point?
-    # @todo Why are we mapping to `*/data/*.nt`? That should be the uri of an 
-    #   RDF document, rather than the actual resource. Is this mapping covering 
-    #   for an error elsewhere?
-    #
+    # @deprecation This now just echos the argument. Callers should remove 
+    #   sends to this method, and use the argument instead.
     # @param uri [String, RDF::URI] a URI or URI-like string
-    # @return [String] the mapped string
+    # @return [String, RDF::URI] the mapped string
     def get_resource_uri(uri)
-      case uri
-      when /dbpedia.org\/resource\//
-        'http://dbpedia.org/data/' + uri.gsub(/.+dbpedia.org\/resource\//, '') + '.nt'
-      else 
-        uri.to_s
-      end
+      warn '[DEPRECATION] #get_resource_uri echos its argument. Callers ' \
+           'should replace method calls with the argument, instead ' \
+           "Called from: #{Gem.location_of_caller.join(':')}"
+      uri
     end
 
     ##
