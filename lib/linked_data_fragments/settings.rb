@@ -44,6 +44,8 @@ module LinkedDataFragments
         config[:uri_endpoint] || 'http://localhost:3000/{?subject}'
       end
 
+      ##
+      # @todo: document the purpose of thsi logic.
       def uri_endpoint_route
         if uri_endpoint.match(/^http[s]*\:\/\/.+\//)
           endpoint = uri_endpoint.gsub(/^http[s]*\:\/\/[^\/]+/, '')
