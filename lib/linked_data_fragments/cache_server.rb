@@ -6,7 +6,20 @@ require 'json/ld'
 
 module LinkedDataFragments
   ##
-  # A basic Cache Server application
+  # A basic cache server.
+  #
+  # @example Mounting in a Rails application.
+  #   # In config/application.rb, or an initializer, etc... 
+  #   require 'linked_data_fragments/cache_server'
+  #
+  #   # In config/routes.rb
+  #   Rails.application.routes.draw do
+  #     # ...
+  #     # mounting at `"/ldcache"`
+  #     mount LinkedDataFragments::CacheServer::APPLICATION => '/ldcache' 
+  #   end
+  #
+  # @see http://www.rubydoc.info/gems/rack/Rack
   class CacheServer
     APPLICATION = Rack::Builder.new do
       use Rack::LinkedData::ContentNegotiation
@@ -41,14 +54,13 @@ module LinkedDataFragments
     #   the response.
     # @see Rack::Response#finish
     def route(env)
-      case env['PATH_INFO']
-      when '/'
+      query = Rack::Utils.parse_nested_query(env['QUERY_STRING'])
+
+      if query.empty?
+        raise NotFound unless env['PATH_INFO'] == '/'
         [200, {}, LinkedDataFragments::DatasetBuilder.new.build]
-      when /#{endpoint_route}/
-        query = Rack::Utils.parse_nested_query(env['QUERY_STRING'])
-        [200, {}, Service.instance.cache.retrieve(query['subject'])]
       else
-        raise NotFound
+        [200, {}, Service.instance.cache.retrieve(query['subject'])]
       end
     end
 
@@ -79,7 +91,7 @@ module LinkedDataFragments
       ##
       # @return [#read]
       def body
-        StringIO.new(BODY)
+        StringIO.new(self.class::BODY)
       end
     end
 
