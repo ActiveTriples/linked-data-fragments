@@ -8,36 +8,35 @@ describe LinkedDataFragments::DatasetBuilder do
   describe '#build' do
     let(:result) { subject.build }
 
-    it 'should assign uri endpoint' do
+    it 'assigns uri endpoint' do
       expect(result.uri_lookup_endpoint)
-        .to eq [LinkedDataFragments::Settings.uri_endpoint.to_s]
+        .to contain_exactly(subject.uri_endpoint.to_s)
     end
 
-    it 'should have the appropriate subject' do
-      expect(result.rdf_subject)
-        .to eq RDF::URI(LinkedDataFragments::Settings.uri_root)
+    it 'has the appropriate subject' do
+      expect(result.rdf_subject).to eq RDF::URI(subject.uri_root)
     end
 
-    xit 'should have a search endpoint with a template' do
+    it 'has a search endpoint with a template' do
       expect(result.search.first.template.first)
-        .to eq LinkedDataFragments::Setting.uri_endpoint
+        .to eq subject.uri_endpoint.to_s
     end
 
-    xit 'should have a search endpoint with mappings' do
+    it 'has a search endpoint with mappings' do
       expect(result.search.first.mapping.first.property)
-        .to eq [RDF.subject]
+        .to contain_exactly(RDF.subject)
     end
   end
 
   describe '#uri_endpoint' do
-    it 'should default to configured value' do
+    it 'defaults to configured value' do
       expect(subject.uri_endpoint.to_s)
         .to eq LinkedDataFragments::Settings.uri_endpoint
     end
   end
 
   describe '#uri_root' do
-    it 'should default to the configured value' do
+    it 'defaults to the configured value' do
       expect(subject.uri_root).to eq LinkedDataFragments::Settings.uri_root
     end
   end
