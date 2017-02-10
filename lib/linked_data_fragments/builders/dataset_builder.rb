@@ -19,51 +19,56 @@ module LinkedDataFragments
   #   #    <http://www.w3.org/ns/hydra/core#search> "http://example.com/{?subject}"
   #   # ] .
   class DatasetBuilder
-    # @!attribute [w]
+    ##
+    # @!attribute [r] control_mapping
+    #   @return [Control]
+    # @!attribute [r] uri_root
+    #   @return [String] a URI-like string representing the root URI for the
+    #     dataset.
+    #   @see Settings#uri_root
+    # @!attribute [rw] uri_endpoint
     #   @return [HydraTemplate]
-    attr_writer :uri_endpoint
+    attr_reader :control_mapping, :uri_endpoint, :uri_root
 
+    ##
+    # @param control_mapping [Control]
+    # @param uri_endpoint [HydraTemplate]
+    # @param uri_root     [String] a URI-like string representing the root URI
+    #   for the dataset.
+    def initialize(control_mapping: { 'subject' => RDF.subject },
+                   uri_endpoint:    default_template,
+                   uri_root:        Settings.uri_root)
+      @control_mapping = control_mapping
+      @uri_endpoint    = uri_endpoint
+      @uri_root        = uri_root
+    end
+
+    ##
+    # @return [Dataset] the dataset built from the current builder state
     def build
       Dataset.new(uri_root).tap do |dataset|
         dataset.uri_lookup_endpoint = uri_endpoint.to_s
         dataset.search = template_builder.new(dataset, uri_endpoint).build
 
         uri_endpoint.controls.each do |control|
-          dataset.search.first.mapping << 
+          dataset.search.first.mapping <<
             control_builder.new(control, control_mapping[control]).build
         end
       end
     end
 
-    ##
-    # @return [HydraTemplate]
-    # @see Settings#uri_endpoint
-    def uri_endpoint
-      @uri_endpoint ||= 
-        LinkedDataFragments::HydraTemplate
-          .new(Settings.uri_endpoint)
-    end
-
-    ##
-    # @return [String] a URI-like string representing the root URI
-    #
-    # @see Settings#uri_root
-    def uri_root
-      Settings.uri_root
-    end
-
     private
-
-    def template_builder
-      TemplateBuilder
-    end
 
     def control_builder
       ControlBuilder
     end
 
-    def control_mapping
-      { "subject" => RDF.subject }
+    def template_builder
+      TemplateBuilder
+    end
+
+    def default_template
+      LinkedDataFragments::HydraTemplate.new(Settings.uri_endpoint)
     end
   end
 end

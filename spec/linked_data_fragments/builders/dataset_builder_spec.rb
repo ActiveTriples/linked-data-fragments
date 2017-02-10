@@ -3,7 +3,9 @@ require 'spec_helper'
 require 'linked_data_fragments/builders'
 
 describe LinkedDataFragments::DatasetBuilder do
-  subject { described_class.new }
+  subject { described_class.new(**opts) }
+
+  let(:opts) { {} }
 
   describe '#build' do
     let(:result) { subject.build }
@@ -26,12 +28,45 @@ describe LinkedDataFragments::DatasetBuilder do
       expect(result.search.first.mapping.first.property)
         .to contain_exactly(RDF.subject)
     end
+
+    context 'with values' do
+      let(:opts) do
+        { uri_endpoint: template, uri_root: root, control_mapping: mapping }
+      end
+
+      let(:mapping)  { { 'object' => RDF.object } }
+      let(:root)     { 'http://example.com/my_dataset/' }
+      let(:template) { LinkedDataFragments::HydraTemplate.new( "#{root}{?object}") }
+
+      it 'has the paramaterized endpoint' do
+        expect(result.uri_lookup_endpoint).to contain_exactly template.to_s
+      end
+
+      it 'has the paramaterized subject' do
+        expect(result.rdf_subject).to eq RDF::URI(root)
+      end
+
+      it 'has a search endpoint with the paramaterized template' do
+        expect(result.search.first.template)
+          .to contain_exactly(template.to_s)
+      end
+
+      it 'has a search endpoint with parameterized mappings' do
+        expect(result.search.first.mapping.first.property)
+          .to contain_exactly(RDF.object)
+      end
+    end
   end
 
   describe '#uri_endpoint' do
     it 'defaults to configured value' do
       expect(subject.uri_endpoint.to_s)
         .to eq LinkedDataFragments::Settings.uri_endpoint
+    end
+
+    it 'default manifests as HydraTemplate instance' do
+      expect(subject.uri_endpoint)
+        .to be_a LinkedDataFragments::HydraTemplate
     end
   end
 
