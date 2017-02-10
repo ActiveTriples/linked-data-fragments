@@ -1,5 +1,4 @@
 class DatasetController < ApplicationController
-
   def index
     @data = built_dataset
 
@@ -15,8 +14,6 @@ class DatasetController < ApplicationController
   private
 
   def built_dataset
-    DatasetBuilder.new.build
+    LinkedDataFragments::DatasetBuilder.new.build
   end
-
-
 end
