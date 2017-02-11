@@ -18,7 +18,8 @@ module LinkedDataFragments
       # @return [Hash<String, String>] the settings from the YAML config
       #   at {.config_path}.
       def config
-        @config ||= YAML::load(File.open(config_path))[env]
+        @config ||= YAML::load(File.open(config_path))
+          .fetch(env) { raise "#{env} missing from ldf.yml" }
           .with_indifferent_access
       end
 
