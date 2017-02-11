@@ -1,11 +1,23 @@
 class DatasetController < ApplicationController
   def index
-    @data = built_dataset
+    data = root_dataset
 
     respond_to do |f|
       renderer_mapping.each do |format, renderer|
         f.send(format) do
-          render :text => renderer.call(@data)
+          render :text => renderer.call(data)
+        end
+      end
+    end
+  end
+
+  def show
+    data = root_dataset
+
+    respond_to do |f|
+      renderer_mapping.each do |format, renderer|
+        f.send(format) do
+          render :text => renderer.call(data)
         end
       end
     end
@@ -13,7 +25,7 @@ class DatasetController < ApplicationController
 
   private
 
-  def built_dataset
+  def root_dataset
     LinkedDataFragments::DatasetBuilder.new.build
   end
 end

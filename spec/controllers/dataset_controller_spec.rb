@@ -50,4 +50,10 @@ RSpec.describe DatasetController do
     end
 
   end
+
+  describe 'show' do
+    it do
+      get :show, id: 'lcsh', format: :nt
+    end
+  end
 end
