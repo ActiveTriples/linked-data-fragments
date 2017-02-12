@@ -12,7 +12,7 @@ class DatasetController < ApplicationController
   end
 
   def show
-    data = root_dataset
+    data = LinkedDataFragments::DatasetBuilder.for(name: params[:id])
 
     respond_to do |f|
       renderer_mapping.each do |format, renderer|

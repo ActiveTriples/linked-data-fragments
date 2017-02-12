@@ -59,6 +59,13 @@ describe DatasetController do
       before { get :show, id: name, format: :nt }
 
       it_behaves_like 'a valid RDF response'
+
+      it 'returns the requested dataset' do
+        reader = RDF::Reader.for(content_type: response.content_type)
+
+        expect(reader.new(response.body))
+          .to have_subject RDF::URI('http://localhost:3000/dataset/lcsh#dataset')
+      end
     end
   end
 end

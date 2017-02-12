@@ -23,6 +23,26 @@ module LinkedDataFragments
     FRAGMENT_ID = '#dataset'.freeze
 
     ##
+    # @todo Add more precise handling for configured templates. The YAML config 
+    #   could use an overhaul to make some of this more accessible.
+    # @return [Dataset]
+    def self.for(name:)
+      uri = RDF::URI(Settings.uri_root)
+      
+      if uri.fragment
+        uri.fragment = nil
+        warn "Configured root URI: `#{Settings.uri_root}` has a fragment. This " \
+             'will be overridden and replaced with `#dataset`. You should ' \
+             "configure a root URI without a fragment; e.g. `#{uri}`."
+      end
+
+      uri      = uri / 'dataset' / name
+      template = LinkedDataFragments::HydraTemplate.new("#{uri.to_s}/{?subject}")
+
+      new(uri_root: uri, uri_endpoint: template).build
+    end
+
+    ##
     # @!attribute [r] control_mapping
     #   @return [Control]
     # @!attribute [r] uri_root

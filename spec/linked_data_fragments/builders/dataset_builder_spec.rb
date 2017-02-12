@@ -7,6 +7,32 @@ describe LinkedDataFragments::DatasetBuilder do
 
   let(:opts) { {} }
 
+  describe '.for' do
+    let(:base_uri) { RDF::URI('http://localhost:3000/dataset') / name }
+    let(:name)     { 'viaf' }
+    let(:result)   { described_class.for(name: name) }
+    
+    it 'builds a dataset for the given name' do
+      expect(result.rdf_subject).to eq base_uri / '#dataset'
+    end
+
+    it 'builds with the correct endpoint' do
+      expect(result.uri_lookup_endpoint)
+        .to contain_exactly(base_uri / '?subject=')
+    end
+
+    it 'builds with the correct search template' do
+      expect(result.search.first.template)
+        .to contain_exactly base_uri / '{?subject}'
+    end
+
+    it 'builds with the correct search mapping' do
+      expect(result.search.first.mapping.first)
+        .to have_attributes(variable: contain_exactly('subject'),
+                            property: contain_exactly(RDF.subject))
+    end
+  end
+
   describe '#build' do
     let(:result) { subject.build }
 
@@ -72,7 +98,8 @@ describe LinkedDataFragments::DatasetBuilder do
 
   describe '#uri_root' do
     it 'defaults to the configured value' do
-      expect(subject.uri_root).to eq LinkedDataFragments::Settings.uri_root
+      expect(subject.uri_root)
+        .to eq RDF::URI(LinkedDataFragments::Settings.uri_root) / '#dataset'
     end
   end
 end
