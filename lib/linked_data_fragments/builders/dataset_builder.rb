@@ -19,6 +19,9 @@ module LinkedDataFragments
   #   #    <http://www.w3.org/ns/hydra/core#search> "http://example.com/{?subject}"
   #   # ] .
   class DatasetBuilder
+    # The fragment used for the dataset URI.
+    FRAGMENT_ID = '#dataset'.freeze
+
     ##
     # @!attribute [r] control_mapping
     #   @return [Control]
@@ -40,7 +43,7 @@ module LinkedDataFragments
                    uri_root:        Settings.uri_root)
       @control_mapping = control_mapping
       @uri_endpoint    = uri_endpoint
-      @uri_root        = uri_root
+      @uri_root        = RDF::URI.intern(uri_root) / FRAGMENT_ID
     end
 
     ##

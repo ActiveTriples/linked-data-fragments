@@ -16,7 +16,7 @@ describe LinkedDataFragments::DatasetBuilder do
     end
 
     it 'has the appropriate subject' do
-      expect(result.rdf_subject).to eq RDF::URI(subject.uri_root)
+      expect(result.rdf_subject).to eq RDF::URI(subject.uri_root) / '#dataset'
     end
 
     it 'has a search endpoint with a template' do
@@ -43,7 +43,7 @@ describe LinkedDataFragments::DatasetBuilder do
       end
 
       it 'has the paramaterized subject' do
-        expect(result.rdf_subject).to eq RDF::URI(root)
+        expect(result.rdf_subject).to eq RDF::URI(root) / '#dataset'
       end
 
       it 'has a search endpoint with the paramaterized template' do
