@@ -38,7 +38,7 @@ describe LinkedDataFragments::DatasetBuilder do
 
     it 'assigns uri endpoint' do
       expect(result.uri_lookup_endpoint)
-        .to contain_exactly(subject.uri_endpoint.to_s)
+        .to contain_exactly 'http://localhost:3000/?subject='
     end
 
     it 'has the appropriate subject' do
@@ -64,8 +64,18 @@ describe LinkedDataFragments::DatasetBuilder do
       let(:root)     { 'http://example.com/my_dataset/' }
       let(:template) { LinkedDataFragments::HydraTemplate.new( "#{root}{?object}") }
 
-      it 'has the paramaterized endpoint' do
-        expect(result.uri_lookup_endpoint).to contain_exactly template.to_s
+      it 'has no endpoint when none is available' do
+        expect(result.uri_lookup_endpoint).to be_empty
+      end
+
+      context 'with a subject endpoint' do
+        let(:template) do
+          LinkedDataFragments::HydraTemplate.new( "#{root}{?object,subject}")
+        end
+
+        it 'has the paramaterized endpoint' do
+          expect(result.uri_lookup_endpoint).to contain_exactly "#{root}?subject="
+        end
       end
 
       it 'has the paramaterized subject' do

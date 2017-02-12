@@ -70,7 +70,7 @@ module LinkedDataFragments
     # @return [Dataset] the dataset built from the current builder state
     def build
       Dataset.new(uri_root).tap do |dataset|
-        dataset.uri_lookup_endpoint = uri_endpoint.to_s
+        dataset.uri_lookup_endpoint = uri_endpoint.lookup_endpoints
         dataset.search = template_builder.new(dataset, uri_endpoint).build
 
         uri_endpoint.controls.each do |control|
