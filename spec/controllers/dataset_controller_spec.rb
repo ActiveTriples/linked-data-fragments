@@ -1,13 +1,19 @@
 require 'rails_helper'
 
 describe DatasetController do
+  shared_examples 'a valid RDF response' do
+    it 'gives a graph in the body' do
+      reader = RDF::Reader.for(content_type: response.content_type)
+
+      expect(reader.new(response.body)).not_to be_empty
+    end
+  end
+
   describe 'index' do
     context 'JSON-LD' do
       before { get :index, :format => :jsonld }
-
-      it 'should return a graph' do
-        expect(JSON::LD::Reader.new(response.body)).not_to be_empty
-      end
+      
+      it_behaves_like 'a valid RDF response'
 
       it 'should be JSON-LD' do
         expect(response.content_type).to eq 'application/ld+json'
@@ -17,9 +23,7 @@ describe DatasetController do
     context 'n-triples' do
       before { get :index, :format => :nt }
 
-      it 'should return a graph' do
-        expect(RDF::NTriples::Reader.new(response.body)).not_to be_empty
-      end
+      it_behaves_like 'a valid RDF response'
 
       it 'should be n-triples' do
         expect(response.content_type).to eq 'application/n-triples'
@@ -28,10 +32,6 @@ describe DatasetController do
 
     context "ttl" do
       before { get :index, :format => :ttl }
-
-      it 'should return a graph' do
-        expect(RDF::Turtle::Reader.new(response.body)).not_to be_empty
-      end
 
       it 'should be n-triples' do
         expect(response.content_type).to eq 'text/turtle'
@@ -53,8 +53,12 @@ describe DatasetController do
   end
 
   describe 'show' do
-    it do
-      get :show, id: 'lcsh', format: :nt
+    context 'n-triples' do
+      let(:name) { 'lcsh' }
+
+      before { get :show, id: name, format: :nt }
+
+      it_behaves_like 'a valid RDF response'
     end
   end
 end
