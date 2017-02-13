@@ -47,39 +47,45 @@ module LinkedDataFragments
     ##
     # @abstract Add a resource to the backend. This method retrieves the 
     #   resource from its URI.
-    # 
+    #
+    # @param uri     [String, RDF::URI] a URI or URI-like string to add
+    # @param context [RDF::URI] the named graph to add the resource to
     # @return [void]
     # @raise [IOError, Net::HTTPError] when retrieving the resource fails with
     #   a non-2xx HTTP status code.
     # @see RDF::Graph#load  this is typical implementation
-    def add(uri)
+    def add(uri, context: cache_backend_context)
       raise NotImplementedError, 
-            "#{self.class} should implement `#empty?`, but does not."
+            "#{self.class} should implement `#add`, but does not."
     end
 
     ##
     # @deprecated Use {#delete_all!} instead.
+    #
+    # @param context [RDF::URI] the named graph to clear
     # @return [void]
-    def delete_all
+    def delete_all(context: cache_backend_context)
       warn "[DEPRECATION] `#{self.class}#delete_all` is deprecated; " \
            "use `#{self.class}#delete_all! instead. Called from: " \
            "#{Gem.location_of_caller.join(':')}"
-      delete_all!
+      delete_all!(context: context)
     end
 
     ##
     # @abstract Implementations must remove all resources from the backend.
     # 
+    # @param context [RDF::URI] the named graph to clear
     # @return [void]
-    def delete_all!
+    def delete_all!(context: cache_backend_context)
       raise NotImplementedError, 
             "#{self.class} should implement `#delete_all!`, but does not."
     end
 
     ##
     # @abstract
+    # @param context [RDF::URI] the named graph to check
     # @return [Boolean] `true` if no resources are stored.
-    def empty?
+    def empty?(context: cache_backend_context)
       raise NotImplementedError, 
             "#{self.class} should implement `#empty?`, but does not."
     end
@@ -99,9 +105,10 @@ module LinkedDataFragments
     ##
     # @abstract checks whether the resource is in the cache
     #
-    # @param uri [String, RDF::URI] a URI or URI-like string
+    # @param uri     [String, RDF::URI] a URI or URI-like string
+    # @param context [RDF::URI] the named graph to check for the resource
     # @return [Boolean]
-    def has_resource?(uri)
+    def has_resource?(uri, context: cache_backend_context)
       raise NotImplementedError,
             "#{self.class} should implement `#has_resource?`, but does not."
     end
@@ -113,9 +120,11 @@ module LinkedDataFragments
     #   `RDF::Repository`?
     # @todo What are we supposed to return if the resource does not exist?
     #
-    # @param uri [String, RDF::URI] a URI or URI-like string
+    # @param uri     [String, RDF::URI] a URI or URI-like string
+    # @param context [RDF::URI] the named graph to use to retrieve & cache the 
+    #   resource
     # @return [RDF::Enumerable] the statements representing requested resource
-    def retrieve(uri)
+    def retrieve(uri, context: cache_backend_context)
       raise NotImplementedError,
             "#{self.class} should implement `#retrieve!`, but does not."
     end

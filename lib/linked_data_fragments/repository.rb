@@ -27,36 +27,46 @@ module LinkedDataFragments
 
     ##
     # @see BackendBase#add
-    def add(uri)
-      repository.load(uri)
+    def add(uri, context: cache_backend_context)
+      graph_for(context).load(uri)
     end
 
     ##
     # Removes all resources from the backend.
     #
     # @return [void]
-    def delete_all!
-      repository.clear
+    def delete_all!(context: cache_backend_context)
+      graph_for(context).clear
     end
 
     ##
     # @see BackendBase#empty?
-    def empty?
-      repository.empty?
+    def empty?(context: cache_backend_context)
+      graph_for(context).empty?
     end
 
     ##
     # @see BackendBase#has_resource?
-    def has_resource?(uri)
-      repository.has_subject?(RDF::URI.intern(uri))
+    def has_resource?(uri, context: cache_backend_context)
+      graph_for(context).has_subject?(RDF::URI.intern(uri))
     end
 
     ##
     # @see BackendBase#retrieve
-    def retrieve(uri)
-      repository.load(uri) unless has_resource?(uri)
+    def retrieve(uri, context: cache_backend_context)
+      add(uri, context: context) unless has_resource?(uri, context: context)
 
       repository.query(subject: RDF::URI.intern(uri))
+    end
+
+    private
+    
+    def graph_for(context)
+      if RDF::VERSION.to_a[0] == '1'
+        RDF::Graph.new(context, data: repository)
+      else
+        RDF::Graph.new(graph_name: context, data: repository)
+      end
     end
   end
 end
