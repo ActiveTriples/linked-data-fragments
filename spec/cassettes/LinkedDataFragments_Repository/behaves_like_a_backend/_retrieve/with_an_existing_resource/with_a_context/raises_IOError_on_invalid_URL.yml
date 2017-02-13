@@ -24,7 +24,7 @@ http_interactions:
       message: See Other
     headers:
       Date:
-      - Mon, 13 Feb 2017 21:20:47 GMT
+      - Mon, 13 Feb 2017 21:20:59 GMT
       Content-Type:
       - application/rdf+xml; qs=0.95
       Content-Length:
@@ -51,7 +51,7 @@ http_interactions:
       Location:
       - http://dbpedia.org/data/Berlin.xml
       Expires:
-      - Mon, 20 Feb 2017 21:20:47 GMT
+      - Mon, 20 Feb 2017 21:20:59 GMT
       Cache-Control:
       - max-age=604800
       Access-Control-Allow-Origin:
@@ -66,7 +66,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 21:18:58 GMT
+  recorded_at: Mon, 13 Feb 2017 21:19:11 GMT
 - request:
     method: get
     uri: http://dbpedia.org/data/Berlin.xml
@@ -91,7 +91,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 13 Feb 2017 21:20:47 GMT
+      - Mon, 13 Feb 2017 21:21:00 GMT
       Content-Type:
       - application/rdf+xml; charset=UTF-8
       Transfer-Encoding:
@@ -103,7 +103,7 @@ http_interactions:
       Server:
       - Virtuoso/07.20.3217 (Linux) i686-generic-linux-glibc212-64  VDB
       Expires:
-      - Mon, 20 Feb 2017 21:20:47 GMT
+      - Mon, 20 Feb 2017 21:21:00 GMT
       Link:
       - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/Berlin.n3>;
         rel="alternate"; type="text/n3"; title="Structured Descriptor Document (N3/Turtle
@@ -24122,5 +24122,69 @@ http_interactions:
         cmNlPSJodHRwOi8vZGJwZWRpYS5vcmcvcmVzb3VyY2UvQmVybGluIiAvPgog
         IDwvcmRmOkRlc2NyaXB0aW9uPgo8L3JkZjpSREY+
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 21:18:59 GMT
+  recorded_at: Mon, 13 Feb 2017 21:19:12 GMT
+- request:
+    method: get
+    uri: http://example.com/moomin
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle, text/rdf+turtle, application/turtle, application/x-turtle, application/ld+json,
+        application/x-ld+json, application/n-triples, text/plain;q=0.5, application/n-quads,
+        text/x-nquads, application/rdf+json, text/html;q=0.5, application/xhtml+xml;q=0.7,
+        image/svg+xml, text/n3, text/rdf+n3, application/rdf+n3, application/rdf+xml,
+        text/csv, text/tab-separated-values, application/csvm+json, application/trig,
+        application/x-trig, application/trix, */*;q=0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=604800
+      Content-Type:
+      - text/html
+      Date:
+      - Mon, 13 Feb 2017 21:21:02 GMT
+      Expires:
+      - Mon, 20 Feb 2017 21:21:02 GMT
+      Last-Modified:
+      - Mon, 13 Feb 2017 21:05:49 GMT
+      Server:
+      - ECS (pae/378B)
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - 404-HIT
+      Content-Length:
+      - '606'
+    body:
+      encoding: ASCII-8BIT
+      string: "<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n
+        \   <meta charset=\"utf-8\" />\n    <meta http-equiv=\"Content-type\" content=\"text/html;
+        charset=utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1\" />\n    <style type=\"text/css\">\n    body {\n        background-color:
+        #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: \"Open
+        Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        \n    }\n
+        \   div {\n        width: 600px;\n        margin: 5em auto;\n        padding:
+        50px;\n        background-color: #fff;\n        border-radius: 1em;\n    }\n
+        \   a:link, a:visited {\n        color: #38488f;\n        text-decoration:
+        none;\n    }\n    @media (max-width: 700px) {\n        body {\n            background-color:
+        #fff;\n        }\n        div {\n            width: auto;\n            margin:
+        0 auto;\n            border-radius: 0;\n            padding: 1em;\n        }\n
+        \   }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n
+        \   <p>This domain is established to be used for illustrative examples in
+        documents. You may use this\n    domain in examples without prior coordination
+        or asking for permission.</p>\n    <p><a href=\"http://www.iana.org/domains/example\">More
+        information...</a></p>\n</div>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Mon, 13 Feb 2017 21:19:14 GMT
 recorded_with: VCR 3.0.3
