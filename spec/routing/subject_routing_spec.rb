@@ -22,4 +22,14 @@ describe 'subject routes' do
                    subject:    'http://dbpedia.org', 
                    format:     'ttl'
   end
+
+  context 'with named dataset' do
+    it 'routes to subject action with dataset parameter' do
+      expect(get '/dataset/lcsh/http://dbpedia.org/resource/Berlin')
+        .to route_to controller: 'subject',
+                     action:     'subject',
+                     dataset:    'lcsh',
+                     subject:    'http://dbpedia.org/resource/Berlin'
+    end
+  end
 end
