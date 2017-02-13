@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe SubjectController do
+describe SubjectController do
+  let(:uri) { 'http://dbpedia.org/resource/Berlin' }
 
-  describe "settings" do
+  describe 'settings' do
     context '#cache_service' do
       it 'defaults be set to a valid service with a retrieve method' do
         expect(SubjectController.cache_service.respond_to?(:retrieve)).to eq true
@@ -10,53 +11,30 @@ RSpec.describe SubjectController do
     end
   end
 
-  describe "subject" do
+  describe '#subject' do
+    ApplicationController.renderer_mapping.each do |format, _|
+      context "with #{format} format", :vcr do
+        let(:reader) { RDF::Reader.for(file_extension: format.to_s) }
 
-    context "JSON-LD", :vcr do
-      before do
-        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin',:format => :jsonld}
-      end
-      it "should return a graph" do
-        expect(JSON::LD::Reader.new(response.body).statements.to_a.length).not_to eq 0
-      end
-      it "should be JSON-LD" do
-        expect(response.content_type).to eq "application/ld+json"
+        before { get :subject, { subject: uri, format: format } }
+
+        it 'gives a graph in the response body' do
+          expect(reader.new(response.body)).not_to be_empty
+        end
+
+        it 'responds with be correct content type' do
+          expect(response.content_type)
+            .to eq Mime::Type.lookup_by_extension(format).to_s
+        end
       end
     end
 
-    context "n-triples", :vcr do
-      before do
-        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :nt} #This breaks in Blazegraph? CHECKME
-      end
-      it "should return a graph" do
-        expect(RDF::NTriples::Reader.new(response.body).statements.to_a.length).not_to eq 0
-      end
-      it "should be n-triples" do
-        expect(response.content_type).to eq "application/n-triples"
+    context 'with invalid format', :vcr do
+      it 'raises 404 Routing Error with valid response formats' do
+        expect { get :subject, { subject: uri, format: :invalid } }
+          .to raise_error(ActionController::RoutingError,
+                          /[ttl].+[application\/ld\+json]/)
       end
     end
-
-    context "ttl", :vcr do
-      before do
-        get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :ttl}
-      end
-      it "should return a graph" do
-        expect(RDF::Turtle::Reader.new(response.body).statements.to_a.length).not_to eq 0
-      end
-      it "should be n-triples" do
-        expect(response.content_type).to eq "text/turtle"
-      end
-    end
-
-    context "invalid", :vcr do
-      it "should be of type 404 Routing Error" do
-        expect{get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :invalid}}.to raise_error(ActionController::RoutingError)
-      end
-
-      it "should output valid response formats" do
-        expect{get :subject, {:subject => 'http://dbpedia.org/resource/Berlin', :format => :invalid}}.to raise_error(ActionController::RoutingError, /[ttl].+[application\/ld\+json]/)
-      end
-    end
-
   end
 end
