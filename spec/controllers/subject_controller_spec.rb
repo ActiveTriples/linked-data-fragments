@@ -3,41 +3,11 @@ require 'rails_helper'
 RSpec.describe SubjectController do
 
   describe "settings" do
-    #FIXME
-    context "#cache_service" do
-      it "should default be set to a valid service with a retrieve method" do
+    context '#cache_service' do
+      it 'defaults be set to a valid service with a retrieve method' do
         expect(SubjectController.cache_service.respond_to?(:retrieve)).to eq true
       end
     end
-
-    context "#routing" do
-      it "should correctly return the subject route for various uri endpoints" do
-
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'http://localhost:3000/{?subject}'})
-        expect(Setting.uri_endpoint_route).to eq '/*subject'
-
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'http://localhost:3000/subject/{?subject}'})
-        expect(Setting.uri_endpoint_route).to eq '/subject/*subject'
-
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'https://localhost:3000/long/a/{?subject}'})
-        expect(Setting.uri_endpoint_route).to eq '/long/a/*subject'
-
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'https://www.example.com:8888/fds/a/{?subject}'})
-        expect(Setting.uri_endpoint_route).to eq '/fds/a/*subject'
-
-      end
-
-      it 'should error on an incorrect uri_endpoint setting' do
-        #No http
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'www.example.com:8888/fds/a/{?subject}'})
-        expect{Setting.uri_endpoint_route}.to raise_error(ArgumentError)
-
-        #No ending slash
-        allow(Setting).to receive(:config).and_return({uri_endpoint: 'http://localhost:3000{?subject}'})
-        expect{Setting.uri_endpoint_route}.to raise_error(ArgumentError)
-      end
-    end
-
   end
 
   describe "subject" do
