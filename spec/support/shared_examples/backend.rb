@@ -11,7 +11,7 @@ shared_examples 'a backend' do
 
     it 'raises ArgumentError when name does not exist' do
       expect { described_class.for(name: :totally_fake) }
-        .to raise_error ArgumentError
+        .to raise_error LinkedDataFragments::BackendBase::UnsupportedBackend
     end
   end
 
