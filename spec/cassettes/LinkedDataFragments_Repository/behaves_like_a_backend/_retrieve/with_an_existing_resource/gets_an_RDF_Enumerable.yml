@@ -2,7 +2,71 @@
 http_interactions:
 - request:
     method: get
-    uri: http://dbpedia.org/data/Berlin.nt
+    uri: http://dbpedia.org/resource/Berlin
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle, text/rdf+turtle, application/turtle, application/x-turtle, application/ld+json,
+        application/x-ld+json, application/n-triples, text/plain;q=0.5, application/n-quads,
+        text/x-nquads, */*;q=0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 303
+      message: See Other
+    headers:
+      Date:
+      - Sat, 04 Feb 2017 04:24:17 GMT
+      Content-Type:
+      - text/turtle; qs=0.7
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      Server:
+      - Virtuoso/07.20.3217 (Linux) i686-generic-linux-glibc212-64  VDB
+      Tcn:
+      - choice
+      Vary:
+      - negotiate,accept
+      Alternates:
+      - '{"/data/Berlin.atom" 0.500000 {type application/atom+xml}}, {"/data/Berlin.jrdf"
+        0.600000 {type application/rdf+json}}, {"/data/Berlin.jsod" 0.500000 {type
+        application/odata+json}}, {"/data/Berlin.json" 0.600000 {type application/json}},
+        {"/data/Berlin.jsonld" 0.500000 {type application/ld+json}}, {"/data/Berlin.n3"
+        0.800000 {type text/n3}}, {"/data/Berlin.nt" 0.800000 {type text/rdf+n3}},
+        {"/data/Berlin.ttl" 0.700000 {type text/turtle}}, {"/data/Berlin.xml" 0.950000
+        {type application/rdf+xml}}'
+      Link:
+      - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://mementoarchive.lanl.gov/dbpedia/timegate/http://dbpedia.org/resource/Berlin>;
+        rel="timegate"
+      Location:
+      - http://dbpedia.org/data/Berlin.ttl
+      Expires:
+      - Sat, 11 Feb 2017 04:24:17 GMT
+      Cache-Control:
+      - max-age=604800
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Headers:
+      - DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sat, 04 Feb 2017 04:22:38 GMT
+- request:
+    method: get
+    uri: http://dbpedia.org/data/Berlin.ttl
     body:
       encoding: US-ASCII
       string: ''
@@ -21,19 +85,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 07 Jan 2017 02:00:28 GMT
+      - Sat, 04 Feb 2017 04:24:18 GMT
       Content-Type:
-      - text/rdf+n3; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      - text/turtle; charset=UTF-8
+      Content-Length:
+      - '386093'
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
       Server:
       - Virtuoso/07.20.3217 (Linux) i686-generic-linux-glibc212-64  VDB
       Expires:
-      - Sat, 14 Jan 2017 02:00:28 GMT
+      - Sat, 11 Feb 2017 04:24:18 GMT
       Link:
       - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/Berlin.xml>;
         rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor
@@ -46,7 +108,7 @@ http_interactions:
         title="OData (JSON format)", <http://dbpedia.org/page/Berlin>; rel="alternate";
         type="text/html"; title="XHTML+RDFa", <http://dbpedia.org/resource/Berlin>;
         rel="http://xmlns.com/foaf/0.1/primaryTopic", <http://dbpedia.org/resource/Berlin>;
-        rev="describedby", <http://mementoarchive.lanl.gov/dbpedia/timegate/http://dbpedia.org/data/Berlin.nt>;
+        rev="describedby", <http://mementoarchive.lanl.gov/dbpedia/timegate/http://dbpedia.org/data/Berlin.ttl>;
         rel="timegate"
       X-Sparql-Default-Graph:
       - http://dbpedia.org
@@ -60,6 +122,8 @@ http_interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Headers:
       - DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Accept-Encoding
+      Accept-Ranges:
+      - bytes
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -8644,5 +8708,5 @@ http_interactions:
         ZQlkYnI6QmVybGluIC4KZGJyOkFlcmlhX0dhbWVzCWRibzpsb2NhdGlvbglk
         YnI6QmVybGluIDsKCWRicDpsb2NhdGlvbglkYnI6QmVybGluIC4=
     http_version: 
-  recorded_at: Sat, 07 Jan 2017 01:59:09 GMT
+  recorded_at: Sat, 04 Feb 2017 04:22:40 GMT
 recorded_with: VCR 3.0.3
