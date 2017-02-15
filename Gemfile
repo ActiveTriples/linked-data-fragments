@@ -33,16 +33,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'responders'
-gem 'rdf'
-gem 'rdf-turtle'
-gem 'json-ld', '~> 1.99'
-#gem 'json-ld'
+gem 'rdf',           '>= 1.99'
+gem 'rdf-turtle',    '>= 1.99'
+gem 'json-ld',       '>= 1.99'
 gem 'active-triples'
-#gem 'rdf-vocab', github: "ruby-rdf/rdf-vocab", branch: "develop"
-gem 'rdf-vocab', '0.8.7.1'
-gem 'jettywrapper', '>= 2.0.0'
+gem 'rdf-vocab',     '>= 0.8.7.1'
+gem 'jettywrapper',  '>= 2.0.0'
 gem 'marmotta'
-gem 'ldfwrapper', github: 'boston-library/ldf-wrapper', branch: "master"
+gem 'ldfwrapper',     github: 'boston-library/ldf-wrapper', branch: "master"
 gem 'rdf-blazegraph'
 
 group :development, :test do
