@@ -21,7 +21,7 @@ http_interactions:
       message: See Other
     headers:
       Date:
-      - Mon, 13 Feb 2017 23:42:47 GMT
+      - Sun, 19 Feb 2017 21:18:27 GMT
       Content-Type:
       - text/turtle; qs=0.7
       Content-Length:
@@ -48,7 +48,7 @@ http_interactions:
       Location:
       - http://dbpedia.org/data/Berlin.ttl
       Expires:
-      - Mon, 20 Feb 2017 23:42:47 GMT
+      - Sun, 26 Feb 2017 21:18:27 GMT
       Cache-Control:
       - max-age=604800
       Access-Control-Allow-Origin:
@@ -63,7 +63,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 23:40:59 GMT
+  recorded_at: Sun, 19 Feb 2017 21:16:34 GMT
 - request:
     method: get
     uri: http://dbpedia.org/data/Berlin.ttl
@@ -85,7 +85,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 13 Feb 2017 23:42:48 GMT
+      - Sun, 19 Feb 2017 21:18:27 GMT
       Content-Type:
       - text/turtle; charset=UTF-8
       Content-Length:
@@ -95,7 +95,7 @@ http_interactions:
       Server:
       - Virtuoso/07.20.3217 (Linux) i686-generic-linux-glibc212-64  VDB
       Expires:
-      - Mon, 20 Feb 2017 23:42:48 GMT
+      - Sun, 26 Feb 2017 21:18:27 GMT
       Link:
       - <http://creativecommons.org/licenses/by-sa/3.0/>;rel="license",<http://dbpedia.org/data/Berlin.xml>;
         rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor
@@ -8707,5 +8707,5 @@ http_interactions:
         YnI6QmVybGluIC4KZGJyOkJlcm5kX1BhdHprZQlkYm86YmlydGhQbGFjZQlk
         YnI6QmVybGluIDsKCWRicDpiaXJ0aFBsYWNlCWRicjpCZXJsaW4gLg==
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 23:41:01 GMT
+  recorded_at: Sun, 19 Feb 2017 21:16:59 GMT
 recorded_with: VCR 3.0.3
