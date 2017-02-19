@@ -51,11 +51,27 @@ describe SubjectController do
       let(:format)  { :ttl }
       let(:dataset) { 'lcsh' }
 
+      let(:dataset_uri) do
+        LinkedDataFragments::DatasetBuilder.for(name: dataset).to_term
+      end
+
       it 'gives a graph in the response body' do
         get :subject, { subject: uri, format: format, dataset: dataset }
         
         expect(RDF::Reader.for(format).new(response.body).statements)
           .not_to be_empty
+      end
+
+      it 'adds content to cache backend for dataset' do
+        get :subject, { subject: uri, format: format, dataset: dataset }
+        
+        expect(subject.cache_service.empty?(context: dataset_uri)).to be false
+      end
+
+      it 'does not add content to other datasets' do
+        get :subject, { subject: uri, format: format, dataset: dataset }
+        
+        expect(subject.cache_service.empty?).to be true
       end
     end
   end

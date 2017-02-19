@@ -16,7 +16,15 @@ class SubjectController < ApplicationController
   end
 
   def subject
-    data = cache_service.retrieve(params[:subject])
+    options = 
+      if params[:dataset]
+        { context: LinkedDataFragments::DatasetBuilder
+            .for(name: params[:dataset]).to_term }
+      else
+        {}
+      end
+
+    data = cache_service.retrieve(params[:subject], **options)
 
     respond_to do |f|
       renderer_mapping.each do |format, renderer|
