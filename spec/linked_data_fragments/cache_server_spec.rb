@@ -9,6 +9,11 @@ describe LinkedDataFragments::CacheServer do
 
   let(:app) { described_class::APPLICATION }
 
+  let(:reader) do
+    RDF::Reader.for(content_type: last_response.headers['Content-Type'])
+      .new(last_response.body)
+  end
+
   before do
     # @todo: REMOVE THIS HACKY STUB
     allow(LinkedDataFragments::Settings)
@@ -17,21 +22,77 @@ describe LinkedDataFragments::CacheServer do
   end
 
   describe '/' do
-    it 'returns a dataset' do
-      get '/'
+    before { get '/' }
 
+    it 'gives 2xx response' do
       expect(last_response).to be_ok
-      expect(last_response.body).to include '#Dataset'
+    end
+
+    it 'returns a dataset' do
+      expect(reader).to have_object RDF::Vocab::VOID.Dataset
+    end
+
+    it 'returns the root dataset' do
+      expect(reader)
+        .to have_subject LinkedDataFragments::DatasetBuilder.new.build.to_uri
     end
   end
   
-  describe '/endpoint', :vcr do
+  describe '/dataset/:dataset' do
+    let(:dataset_name) { 'lcsh' }
+    let(:path)         { "/dataset/#{dataset_name}" }
+
+    let(:dataset_uri) do
+      LinkedDataFragments::DatasetBuilder
+        .for(name: dataset_name).to_term
+    end
+
+    before { get path }
+   
+    it 'gives 2xx response' do
+      expect(last_response).to be_ok
+    end
+
+    it 'returns a dataset' do
+      expect(reader).to have_object RDF::Vocab::VOID.Dataset
+    end
+
+    it 'returns the root dataset' do
+      expect(reader.subjects).to include dataset_uri
+    end
+  end
+
+  describe '/{?subject}', vcr: { cassette_name: 'dbpedia' } do
     let(:uri) { 'http://dbpedia.org/resource/Berlin' }
 
-    it 'accesses cache' do
-      get "/subject?subject=#{uri}"
+    it 'returns 2xx status' do
+      get "/?subject=#{uri}"
 
       expect(last_response).to be_ok
+    end
+
+    it 'returns the requested resource' do
+      get "/?subject=#{uri}"
+      
+      expect(reader).to have_subject RDF::URI(uri)
+    end
+  end
+
+  describe '/dataset/:dataset/{?subject}', vcr: { cassette_name: 'dbpedia' } do
+    let(:dataset_name) { 'lcsh' }
+    let(:path)         { "/dataset/#{dataset_name}" }
+    let(:uri)          { 'http://dbpedia.org/resource/Berlin' }
+
+    it 'returns 2xx status' do
+      get "#{path}?subject=#{uri}"
+
+      expect(last_response).to be_ok
+    end
+
+    it 'returns the requested resource' do
+      get "#{path}/?subject=#{uri}"
+      
+      expect(reader).to have_subject RDF::URI(uri)
     end
   end
 

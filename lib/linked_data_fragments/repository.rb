@@ -3,7 +3,6 @@ module LinkedDataFragments
   # A basic `RDF::Repository` backend. This simply wraps RDF::Repository with
   # the smaller `BackendBase` interface.
   #
-
   # @example with a new in-memory repository
   #   backend = LinkedDataFragments.new
   #   backend.retrieve('http://example.com/moomin')

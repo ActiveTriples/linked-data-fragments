@@ -25,7 +25,7 @@ module LinkedDataFragments
       use Rack::LinkedData::ContentNegotiation
 
       map '/' do 
-        run LinkedDataFragments::CacheServer.new
+        run CacheServer.new
       end
     end
 
@@ -41,7 +41,22 @@ module LinkedDataFragments
       [err.status, err.headers, err.body]
     end
 
-    private
+    ##
+    # @param dataset [Dataset]
+    # @param query   [Hash<String, String>]
+    #
+    # @return [Array] A Rack response array, with an {RDF::Enumerable} in the 
+    #   body position
+    def response_for(dataset, query)
+      resource = if query['subject']
+        Service.instance
+          .cache.retrieve(query['subject'], context: dataset.to_term)
+      else
+        dataset 
+      end
+
+      [200, {}, resource]
+    end
 
     ##
     # Routes the request environment and returns a response.
@@ -56,19 +71,15 @@ module LinkedDataFragments
     def route(env)
       query = Rack::Utils.parse_nested_query(env['QUERY_STRING'])
 
-      if query.empty?
-        raise NotFound unless env['PATH_INFO'] == '/'
-        [200, {}, LinkedDataFragments::DatasetBuilder.new.build]
+      case env['PATH_INFO']
+      when /\/$/
+        response_for(DatasetBuilder.new.build, query)
+      when /\/dataset\/(?<name>.*)$/
+        response_for(DatasetBuilder.for(name: Regexp.last_match[:name]), query)
       else
-        [200, {}, Service.instance.cache.retrieve(query['subject'])]
+        raise NotFound
       end
     end
-
-    def endpoint_route
-      LinkedDataFragments::Settings.uri_endpoint_route
-    end
-
-    public
 
     ##
     # A basic request error
