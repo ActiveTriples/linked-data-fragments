@@ -35,10 +35,25 @@ class SubjectController < ApplicationController
 
   def fix_passed_params
     #Seems like a double '//' in the captured param is changed to a single one. Unsure of how better to do this...
-    single_slash_match = params[:subject].match(/^http[s]*\:\/(?!\/)/)
-    if single_slash_match.present?
-      params[:subject] = params[:subject][0..single_slash_match[0].length-1] + '/' + params[:subject][single_slash_match[0].length..params[:subject].length]
+    if params[:subject].present?
+      single_slash_match = params[:subject].match(/^http[s]*\:\/(?!\/)/)
+      if single_slash_match.present?
+        params[:subject] = params[:subject][0..single_slash_match[0].length-1] + '/' + params[:subject][single_slash_match[0].length..params[:subject].length]
+      end
     end
+  end
+
+  def query
+    @data = SubjectController.cache_service.query(params[:q])
+
+    respond_to do |f|
+      renderer_mapping.each do |format, renderer|
+        f.send(format) do
+          render :text => renderer.call(@data)
+        end
+      end
+    end
+
   end
 
 

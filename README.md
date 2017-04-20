@@ -4,6 +4,28 @@ Linked Data Fragments
 A linked data fragment which takes an arbitrary subject and returns a cached
 result.
 
+LDF Partial Matching README information
+=======================================
+
+1. This has some refactors for Blazegraph based on changes that Tom Johnson had done to the Repository interface. However,
+the change to Blazegraph were only moslty completed.
+
+2. This only is implemented for Blazegraph at the moment. The code itself is proof-of-concept and very rough.
+
+3. To try this out, use the blazegraph ldf config example. Get a Blazegraph instance up (you can use the ldfjetty to
+start one easily). Load up some urls either by loading a downloaded file from LCSH or by doing some requests against
+the endpoint (note: if doing requests, the pattern now has an "<url>/s/" base where the s is "subject"). An example
+of loading Berlin via this method is: http://localhost:3000/s/http://dbpedia.org/resource/Berlin?format=jsonld
+
+4. The queries from https://wiki.duraspace.org/display/hydra/Applied+Linked+Data+2017-02-06 should all function. They
+will return results as long as you have data that matches them (ie. the "Las" example requires you to load a dbpedia or
+LCSH uri with that in it).
+
+5. It is recommended to implement the interface from: https://github.com/ActiveTriples/linked-data-fragments/issues/40#issuecomment-279092171 .
+This query syntax was before that comment and requires a bit of a refactor of this library.
+
+6. I had intended to do more but kept never having time so I do apologize.
+
 Configuration
 =============
 

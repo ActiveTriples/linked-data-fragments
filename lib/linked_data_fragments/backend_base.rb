@@ -34,7 +34,7 @@ module LinkedDataFragments
     # @see RDF::Graph#load  this is typical implementation
     def add(uri)
       raise NotImplementedError, 
-            "#{self.class} should implement `#empty?`, but does not."
+            "#{self.class} should implement `#add?`, but does not."
     end
 
     ##

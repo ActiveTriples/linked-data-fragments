@@ -28,7 +28,7 @@ class Setting
     end
 
     def uri_endpoint
-      Setting.config[:uri_endpoint] || 'http://localhost:3000/{?subject}'
+      Setting.config[:uri_endpoint] || 'http://localhost:3000/s/{?subject}'
     end
 
     def uri_endpoint_route
@@ -38,6 +38,22 @@ class Setting
       else
         #FIXME: What type of error should this be? Need to unit test this as well once figured out.
         raise ArgumentError, 'Invalid uri endpoint url specified'
+      end
+
+      return endpoint
+    end
+
+    def query_endpoint
+      Setting.config[:query_endpoint] || 'http://localhost:3000/q/{?subject}'
+    end
+
+    def uri_query_route
+      if query_endpoint.match(/^http[s]*\:\/\/.+\//)
+        endpoint = query_endpoint.gsub(/^http[s]*\:\/\/[^\/]+/, '')
+        endpoint.gsub!('{?subject}', '*subject')
+      else
+        #FIXME: What type of error should this be? Need to unit test this as well once figured out.
+        raise ArgumentError, 'Invalid uri query url specified'
       end
 
       return endpoint

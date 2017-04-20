@@ -1,6 +1,7 @@
 development:
-  uri_endpoint: 'http://localhost:3000/{?subject}'
+  uri_endpoint: 'http://localhost:3000/s/{?subject}'
   uri_root: 'http://localhost:3000/#dataset'
+  query_endpoint: 'http://localhost:3000/ldf/'
   cache_backend:
     provider: 'blazegraph'
     url: 'http://localhost:8988/blazegraph/sparql'
